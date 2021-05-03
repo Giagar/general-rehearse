@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>HTTP Request</h1>
+        <div class="description">Three ways of making an HTTP Request</div>
+    </header>
+    <section class="section vanilla">
+        <h2>Fetch</h2>
+        <ul class="target-vanilla"></ul>
+    </section>
+    <section class="section jquery">
+        <h2>jQuery</h2>
+        <ul class="target-jquery"></ul>
+    </section>
+    <section class="section axiosVue">
+        <h2>Vue plus Axios</h2>
+        <div id="app">
+            <ul>
+                <li v-for="movie in res">{{movie.title}}</li>
+            </ul>
+        </div>
+    </section>
+
+    <script src="./script.js"></script>
+</body>
+</html>
