@@ -29,14 +29,14 @@
     <hr>
 
     <h2>Playing with arrays</h2>
-    <?php 
+    <?php
     $list = ["first", "second", "third", "fourth", "fifth", "sixth"];
 
     // get the word from the user
     $word = $_GET["word"];
 
     // check if if the word is in the array
-    if(in_array($word, $list)) {
+    if (in_array($word, $list)) {
         $result =  "<p>The word $word is in the list at position " . array_search($word, $list);
     } else {
         $result = "The word '$word' is not in the list";
@@ -51,14 +51,15 @@
     <h2>Create an array of random numbers</h2>
     <?php
 
-    function createArrayOfIntegers($min, $max, $numberOfIntegers) {
-        
+    function createArrayOfIntegers($min, $max, $numberOfIntegers)
+    {
+
         $arrayOfIntegers = [];
-        
-        for($i = count($arrayOfIntegers); $i < $numberOfIntegers;) {
+
+        for ($i = count($arrayOfIntegers); $i < $numberOfIntegers;) {
             $newInteger = rand($min, $max);
-            
-            if(!in_array($newInteger, $arrayOfIntegers)) {
+
+            if (!in_array($newInteger, $arrayOfIntegers)) {
                 $arrayOfIntegers[] = $newInteger;
                 $i++;
             }
@@ -66,15 +67,28 @@
 
         return $arrayOfIntegers;
     }
-    
+
     var_dump(createArrayOfIntegers(1, 5, 5));
     ?>
 
     <hr>
 
     <h2>Snack1</h2>
-    <?php 
-    
+    <div class="assignment-container">
+        <h3>Assignment:</h3>
+        <p>Creiamo un array 'matches' contenente altri array i
+            quali rappresentano delle partite di basket di
+            un’ipotetica tappa del calendario. Ogni array della
+            partita avrà una squadra di casa e una squadra
+            ospite, punti fatti dalla squadra di casa e punti fatti
+            dalla squadra ospite.
+            Stampiamo a schermo tutte le partite con questo
+            schema:
+            Olimpia Milano - Cantù | 55 - 60</p>
+    </div>
+    <br>
+    <?php
+
     $matches = [
         "partita1" => [
             "squadra-casa" => "nome-casa-p1",
@@ -82,42 +96,67 @@
             "punti-casa" => rand(1, 5),
             "punti-ospite" => rand(1, 5),
         ],
-        
+
         "partita2" => [
             "squadra-casa" => "nome-casa-p2",
             "squadra-ospite" => "nome-ospite-p2",
             "punti-casa" => rand(1, 5),
             "punti-ospite" => rand(1, 5),
         ],
-        
+
         "partita3" => [
             "squadra-casa" => "nome-casa-p3",
             "squadra-ospite" => "nome-ospite-p3",
             "punti-casa" => rand(1, 5),
             "punti-ospite" => rand(1, 5),
         ],
-        
+
         "partita4" => [
             "squadra-casa" => "nome-casa-p4",
             "squadra-ospite" => "nome-ospite-p4",
             "punti-casa" => rand(1, 5),
             "punti-ospite" => rand(1, 5),
         ],
-        
+
         "partita5" => [
             "squadra-casa" => "nome-casa-p5",
             "squadra-ospite" => "nome-ospite-p5",
             "punti-casa" => rand(1, 5),
             "punti-ospite" => rand(1, 5),
         ],
-        
+
     ];
 
-    
-    foreach($matches as $match => $value) {
-        echo $match . ': ' . $value["squadra-casa"] . ' - ' . $value["squadra-ospite"] . ' | ' . $value["punti-casa"]. ' - ' . $value["punti-ospite"] . '<br>';
+
+    foreach ($matches as $match => $value) {
+        echo $match . ': ' . $value["squadra-casa"] . ' - ' . $value["squadra-ospite"] . ' | ' . $value["punti-casa"] . ' - ' . $value["punti-ospite"] . '<br>';
     }
- 
+
+    ?>
+    <hr>
+    <h2>Snack 2</h2>
+    <div class="assignment-container">
+        <h3>Assignment:</h3>
+        <p>Passare come parametri GET name, mail e age e
+            verificare (cercando i metodi che non
+            conosciamo nella documentazione) che:
+            1. name sia più lungo di 3 caratteri,
+            2. mail contenga un punto e una chiocciola
+            3. age sia un numero.
+            Se tutto è ok stampare “Accesso riuscito”, altrimenti
+            “Accesso negato”</p>
+    </div>
+    <?php
+    ["name" => $name, "mail" => $email, "age" => $age] = $_GET;
+    var_dump(strlen($name) > 3);
+    
+    if(strlen($name) > 3 && strpos($email, ".") && strpos($email, "@") && is_numeric($age)) {
+        $result_s2 = "Access granted";
+    } else {
+        $result_s2 = "Access denied";
+    }
+
+    echo $result_s2;
     ?>
 
 </body>
