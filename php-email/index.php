@@ -149,14 +149,84 @@
     <?php
     ["name" => $name, "mail" => $email, "age" => $age] = $_GET;
     var_dump(strlen($name) > 3);
-    
-    if(strlen($name) > 3 && strpos($email, ".") && strpos($email, "@") && is_numeric($age)) {
+
+    if (strlen($name) > 3 && strpos($email, ".") && strpos($email, "@") && is_numeric($age)) {
         $result_s2 = "Access granted";
     } else {
         $result_s2 = "Access denied";
     }
 
     echo $result_s2;
+    ?>
+
+    <hr>
+    <h2>Snack 3</h2>
+    <div class="assignment-container">
+        <h3>Assignment:</h3>
+        <p>Creare un array di array.
+            Ogni array figlio avrà come chiave una data in questo formato: DD/MM/YYYY
+            (ad es 31/01/2007) e come valore un array di post associati a quella data.
+            Stampare ogni data con i relativi post.
+
+            Qui l’array di esempio:
+            <a href="https://www.codepile.net/pile/R2K5d68z" target="_blank">link</a>
+        </p>
+    </div>
+    <?php
+
+    ?>
+
+    <hr>
+    <h2>Snack 4</h2>
+    <div class="assignment-container">
+        <h3>Assignment:</h3>
+        <p>Creare un array contenente qualche alunno di un’ipotetica classe. Ogni alunno
+            avrà Nome, Cognome e un array contenente i suoi voti scolastici.
+            Stampare Nome, Cognome e la media dei voti di ogni alunno.
+        </p>
+    </div>
+    <?php
+    $students = [
+        "student1" => [
+            "name" => "st1-name",
+            "surname" => "st1-surname",
+            "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
+        ], 
+        "student2" => [
+            "name" => "st2-name",
+            "surname" => "st2-surname",
+            "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
+        ], 
+        "student3" => [
+            "name" => "st3-name",
+            "surname" => "st3-surname",
+            "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
+        ], 
+        "student4" => [
+            "name" => "st4-name",
+            "surname" => "st4-surname",
+            "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
+        ], 
+        "student5" => [
+            "name" => "st5-name",
+            "surname" => "st5-surname",
+            "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
+        ], 
+        "student6" => [
+            "name" => "st6-name",
+            "surname" => "st6-surname",
+            "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
+        ]
+    ];
+
+    foreach($students as $key => $student) {
+        $scoreAverage = 0;
+        foreach($student["scores"] as $score) {
+            $scoreAverage += $score;
+        }
+        $scoreAverage = $scoreAverage / count($student["scores"]);
+        echo $student["name"] . " " . $student["surname"] . ", " . $scoreAverage . "<br>";
+    }
     ?>
 
 </body>
