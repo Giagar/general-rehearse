@@ -191,27 +191,27 @@
             "name" => "st1-name",
             "surname" => "st1-surname",
             "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
-        ], 
+        ],
         "student2" => [
             "name" => "st2-name",
             "surname" => "st2-surname",
             "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
-        ], 
+        ],
         "student3" => [
             "name" => "st3-name",
             "surname" => "st3-surname",
             "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
-        ], 
+        ],
         "student4" => [
             "name" => "st4-name",
             "surname" => "st4-surname",
             "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
-        ], 
+        ],
         "student5" => [
             "name" => "st5-name",
             "surname" => "st5-surname",
             "scores" => [rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10), rand(6, 10)]
-        ], 
+        ],
         "student6" => [
             "name" => "st6-name",
             "surname" => "st6-surname",
@@ -219,14 +219,39 @@
         ]
     ];
 
-    foreach($students as $key => $student) {
+    foreach ($students as $key => $student) {
         $scoreAverage = 0;
-        foreach($student["scores"] as $score) {
+        foreach ($student["scores"] as $score) {
             $scoreAverage += $score;
         }
         $scoreAverage = $scoreAverage / count($student["scores"]);
         echo $student["name"] . " " . $student["surname"] . ", " . $scoreAverage . "<br>";
     }
+    ?>
+
+    <hr>
+    <h2>Snack 5</h2>
+    <div class="assignment-container">
+        <h3>Assignment:</h3>
+        <p>Prendere un testo abbastanza lungo, contenente diverse frasi.
+            Suddividere il testo in tanti paragrafi
+            &lt;p&gt;: ad ogni punto corrisponde un nuovo
+            paragrafo.
+        </p>
+    </div>
+    <?php
+    $text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati quisquam perspiciatis dolore dignissimos tempore blanditiis maiores ratione! Velit assumenda beatae tempore, nulla eaque perferendis deleniti totam vitae sunt voluptatem iusto.";
+    $newText = explode(". ", $text);
+    $result_s5 = [];
+    
+    foreach($newText as $sentence) {
+        $result_s5[] = "<p>" . $sentence . ".</p>";
+    }
+
+    $result_s5 = implode("", $result_s5);
+
+    echo preg_replace("/\.{2}/i", ".", $result_s5);
+
     ?>
 
 </body>
