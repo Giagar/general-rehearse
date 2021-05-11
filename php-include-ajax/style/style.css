@@ -1,0 +1,16 @@
+* {box-sizing: border-box;}
+
+.disc-collection {
+    display: flex;
+    column-gap: 5px;
+}
+
+.disc-container {
+    height: 150px;
+    width: 100px;
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
