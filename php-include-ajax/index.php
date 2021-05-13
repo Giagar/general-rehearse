@@ -105,6 +105,22 @@ include "./partials/colors.php";
         </div>
     </div>
     <script src="./script/script_vue_e1.js"></script>
+    
+    <h3>VUE again</h3>
+    <div id="app_e1r">
+        <select name="filter" id="filter" @change="handleFilter(filter.value)">
+            <option value="all">-- All --</option>
+            <option v-for="(genre, index) in genres" :key="index" :value="genre">{{genre}}</option>
+        </select>
+        <div class="disc-collection">
+            <div class="disc-container" v-for="(disc, index) in albums" :key="index">
+                <h4>{{disc.title}}</h4>
+                <div>{{disc.author}}</div>
+                <div>{{disc.genre}}</div>
+            </div>
+        </div>
+    </div>
+    <script src="./script/script_e1r.js"></script>
 </body>
 
 </html>
