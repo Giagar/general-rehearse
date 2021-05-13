@@ -279,7 +279,70 @@
         }
 
         document.querySelector(".js-result-algo10").innerHTML = booWho(null);
+    </script>
+    <hr>
 
+    <h3>Algo11: Title Case a Sentence</h3>
+    <?php
+    function titleCase($str)
+    {
+        $arr = explode(" ", $str);
+        foreach ($arr as $el) {
+            $result[] = strtoupper($el[0]) . strtolower(substr($el, 1));
+        }
+        return implode(" ", $result);
+    }
+
+    echo titleCase("I'm a little tea pot");
+    ?>
+    <div class="js-result-algo11"></div>
+    <script>
+        function titleCase(str) {
+            let result = [];
+            str
+                .split(" ")
+                .forEach(el => result.push(el[0].toUpperCase() + el.slice(1).toLowerCase()));
+
+            return result.join(" ");
+        }
+
+        document.querySelector(".js-result-algo11").innerHTML = titleCase("I'm a little tea pot");
+    </script>
+    <hr>
+
+    <h3>Algo12: Slice and Splice</h3>
+    <?php
+    function frankenSplice($arr1, $arr2, $n)
+    {
+
+        foreach (array_slice($arr2, 0, $n) as $el2) {
+            $result[] = $el2;
+        }
+
+        foreach ($arr1 as $el1) {
+            $result[] = $el1;
+        }
+
+        foreach (array_slice($arr2, $n) as $el2s) {
+            $result[] = $el2s;
+        }
+
+        return $result;
+    }
+    var_dump(frankenSplice([1, 2, 3], [4, 5, 6], 1));
+
+    ?>
+    <div class="js-result-algo12"></div>
+    <script>
+        function frankenSplice(arr1, arr2, n) {
+            let result = [];
+
+            result = [...arr2.slice(0, n), ...arr1, ...arr2.slice(n)];
+
+            return result;
+        }
+
+        document.querySelector(".js-result-algo12").innerHTML = `[ ${frankenSplice([1, 2, 3], [4, 5, 6], 1)} ]`;
     </script>
     <hr>
 
