@@ -158,10 +158,128 @@
             [32, 35, 37, 39],
             [1000, 1001, 857, 1]
         ]);
-        
+
         let print_a5 = `[ ${result_a5.join(", ")} ]`;
 
         document.querySelector(".js-result-algo5").innerHTML = print_a5;
+    </script>
+    <hr>
+
+    <h3>Algo6: Confirm the Ending</h3>
+    <?php
+    function confirmEnding($str, $target)
+    {
+        return substr($str, -strlen($target)) === $target;
+    }
+
+    var_dump(confirmEnding("Bastian", "n"));
+    ?>
+    <div class="js-result-algo6"></div>
+    <script>
+        function confirmEnding(str, target) {
+            return str.slice(-target.length) === target;
+        }
+
+        document.querySelector(".js-result-algo6").innerHTML = confirmEnding("Bastian", "n");
+    </script>
+    <hr>
+
+    <h3>Algo7: Repeat a String</h3>
+    <?php
+    function repeatStringNumTimes($str, $num)
+    {
+        $result_a7 = "";
+
+        for ($i = 1; $i <= $num; $i++) {
+            $result_a7 .= $str;
+        }
+
+        return $result_a7;
+    }
+
+    echo repeatStringNumTimes("abc", 3);
+    ?>
+    <div class="js-result-algo7"></div>
+    <script>
+        function repeatStringNumTimes(str, num) {
+            let result = "";
+
+            for (let i = 1; i <= num; i++) {
+                result += str;
+            }
+
+            return result;
+        }
+
+        document.querySelector(".js-result-algo7").innerHTML = repeatStringNumTimes("abc", 3);
+    </script>
+    <hr>
+
+    <h3>Algo8: Truncate a String</h3>
+    <?php
+    function truncateString($str, $num)
+    {
+        return strlen($str) > $num ? substr($str, 0, $num) . "..." : $str;
+    }
+
+    echo truncateString("A-tisket a-tasket A green and yellow basket", 8);
+    ?>
+    <div class="js-result-algo8"></div>
+    <script>
+        function truncateString(str, num) {
+            return str.length > num ? str.slice(0, num) + "..." : str;
+        }
+
+        document.querySelector(".js-result-algo8").innerHTML = truncateString("A-tisket a-tasket A green and yellow basket", 8);
+    </script>
+    <hr>
+
+    <h3>Algo9: Finders Keepers</h3>
+    <?php
+    function findElement($arr, $func)
+    {
+        foreach ($arr as $el) {
+            if ($func($el)) {
+                return $el;
+            }
+        }
+    }
+
+    echo findElement([1, 2, 3, 4], function ($num) {
+        return $num % 2 === 0;
+    });
+    ?>
+    <div class="js-result-algo9"></div>
+    <script>
+        function findElement(arr, func) {
+            for (let el of arr) {
+                if (func(el)) {
+                    return el;
+                }
+            }
+        }
+
+        document.querySelector(".js-result-algo9").innerHTML = findElement([1, 2, 3, 4], num => num % 2 === 0);
+    </script>
+    <hr>
+
+    <h3>Algo10: Boo who</h3>
+    <?php
+    function booWho($bool)
+    {
+        return gettype($bool) === "boolean";
+    }
+
+    var_dump(booWho(null));
+    ?>
+    <div class="js-result-algo10"></div>
+    <script>
+        function booWho(bool) {
+            return typeof bool === "boolean";
+        }
+
+        document.querySelector(".js-result-algo10").innerHTML = booWho(null);
+
     </script>
     <hr>
 
