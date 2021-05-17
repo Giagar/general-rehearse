@@ -346,6 +346,92 @@
     </script>
     <hr>
 
+    <h3>Algo13: Falsy Bouncer</h3>
+    <?php
+
+    function bouncer($arr)
+    {
+        foreach ($arr as $el) {
+            if ($el) {
+                $result[] = $el;
+            }
+        }
+
+        return $result;
+    }
+
+    var_dump(bouncer([7, "ate", "", false, 9]));
+    ?>
+    <div class="js-result-algo13"></div>
+    <script>
+        function bouncer(arr) {
+            return arr.filter(el => el);
+        }
+
+        document.querySelector(".js-result-algo13").innerHTML = bouncer([7, "ate", "", false, 9]);
+    </script>
+    <hr>
+
+    <h3>Algo14: Where do I Belong</h3>
+    <?php
+    function getIndexToIns($arr, $num)
+    {
+        $result = [...$arr];
+        $result[] = $num;
+        sort($result, $flags = SORT_NUMERIC);
+        return array_search($num, $result);
+    }
+
+    echo getIndexToIns([40, 60], 50);
+    ?>
+    <div class="js-result-algo14"></div>
+    <script>
+        function getIndexToIns(arr, num) {
+            let result = [...arr, num];
+
+            return result
+                .sort((a, b) => a - b)
+                .indexOf(num);
+        }
+
+        document.querySelector(".js-result-algo14").innerHTML = getIndexToIns([40, 60], 50);
+    </script>
+    <hr>
+
+    <h3>Algo15: Mutations</h3>
+    <?php
+    function mutation($arr)
+    {
+        foreach (str_split($arr[1]) as $letter) {
+            if (!preg_match("/$letter/i", $arr[0])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    var_dump(mutation(["hello", "hey"]));
+
+    ?>
+    <div class="js-result-algo15"></div>
+    <script>
+        function mutation(arr) {
+            for(let letter of arr[1]) {
+                let regex = new RegExp(letter, "i");
+                if(!regex.test(arr[0])) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        document.querySelector(".js-result-algo15").innerHTML = mutation(["hello", "hey"]);
+
+
+    </script>
+    <hr>
+
 
 </body>
 
