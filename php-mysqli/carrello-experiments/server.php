@@ -97,8 +97,8 @@ if (isset($_POST["clear"])) {
 
 // elimina un elemento dal carrello
 if (isset($_POST["delete"])) {
-  $id = $_POST["id"];
-  $stmt = $dbConnection->prepare("DELETE FROM cart WHERE id=?");
-  $stmt->bind_param("i",$id);
+  $productId = $_POST["id"];
+  $stmt = $dbConnection->prepare("DELETE FROM orders WHERE product_id=?");
+  $stmt->bind_param("i",$productId);
   $stmt->execute();
 }
