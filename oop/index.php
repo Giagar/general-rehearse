@@ -21,6 +21,7 @@ class Person {
     public function getName() {
         echo $this->name;
     }
+    
     public function getSurname() {
         echo $this->surname;
     }

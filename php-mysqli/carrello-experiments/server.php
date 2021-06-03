@@ -1,0 +1,104 @@
+<?php 
+require_once "config.php";
+
+// prendere dati da products per comporre lista prodotti in shop
+$stmt = $dbConnection->prepare("SELECT * FROM products");
+$stmt->execute();
+$dbProductsList = $stmt->get_result();
+$productList = [];
+while($row = $dbProductsList->fetch_assoc()){
+$productList[] = $row;
+};
+
+// aggiungo i prodotti arrivati da index.php al carrello (tabella db)
+if(isset($_POST["productId"])) {
+    $productId = $_POST["productId"];
+    $productName = $_POST["productName"];
+    $productCode = $_POST["productCode"];
+    $productQuantity = $_POST["productQuantity"];
+    $productPrice = $_POST["productPrice"];
+
+    $total_price = $productPrice * $productQuantity;
+
+    $stmt = $dbConnection->prepare("SELECT product_code FROM cart WHERE product_code=?");
+    $stmt->bind_param("s", $productCode, ); // per evitare sql injection
+    $stmt->execute();
+
+    $response = $stmt->get_result();
+    $res = $response->fetch_assoc();
+    $code = $res["product_code"] ?? "";
+    
+    // controlla che il prodotto non sia già presente nel carrello
+    if (!$code) {
+      // se non ancora presente
+	    $query = $dbConnection->prepare("INSERT INTO cart (product_name, product_code, qty, product_price, total_price) VALUES (?,?,?,?,?)");
+	    $query->bind_param("ssidd", $productName, $productCode, $productQuantity, $productPrice, $total_price);
+	    $query->execute();
+
+      // messaggio di successo
+	    echo '<div class="alert alert-success alert-dismissible">
+						  <button type="button" class="btn-close close" data-dismiss="alert" onclick="(() => $(this).parent().hide())()"></button>
+						  <strong>Prodotto aggiunto al carrello</strong>
+						</div>';
+	  } else {
+
+      // se già presente: messaggio di avviso
+	    echo '<div class="alert alert-danger alert-dismissible">
+						  <button type="button" class="btn-close close" data-dismiss="alert" onclick="(() => $(this).parent().hide())()"></button>
+						  <strong>Prodotto già presente nel carrello</strong>
+						</div>';
+	  }
+}
+
+// aggiorno database in seguito a cambiamento quantità nel carrello
+if(isset($_POST["changeProductQuantity"])) {
+  $id = $_POST["cartItemId"];
+  $productCode = $_POST["productCode"];
+  $productQuantity = $_POST["productQuantity"];
+  $productPrice = $_POST["productPrice"];
+
+  $total_price = $productPrice * $productQuantity;
+
+  $stmt = $dbConnection->prepare("UPDATE cart SET qty=?, total_price=? WHERE product_code=?");
+  $stmt->bind_param("ids", $productQuantity, $total_price, $productCode ); // per evitare sql injection
+  $stmt->execute();
+
+  $response = $stmt->get_result();
+  $res = $response->fetch_assoc();
+  $code = $res["product_code"] ?? "";
+  
+  $query = $dbConnection->prepare("INSERT INTO cart (product_code, qty, product_price, total_price) VALUES (?,?,?,?)");
+  $query->bind_param("sidd",$productCode, $productQuantity, $productPrice, $total_price);
+  $query->execute();
+}
+
+// prendere dati da carrello
+$stmt = $dbConnection->prepare("SELECT * FROM cart");
+$stmt->execute();
+$result = $stmt->get_result();
+$cartContent = [];
+while ($row = $result->fetch_assoc()) {
+  $cartContent[0][] = $row;
+}
+// calcolare prezzo totale del carrello
+$grand_total = 0; 
+if($cartContent) {
+  foreach($cartContent[0] as $product) {
+    $grand_total += (float)$product["total_price"];
+  }
+}
+$cartContent[1][] = $grand_total;
+
+// svuota carrello
+if (isset($_POST["clear"])) {
+  $stmt = $dbConnection->prepare("DELETE FROM cart");
+  $stmt->execute();
+}
+
+// elimina un elemento dal carrello
+if (isset($_POST["delete"])) {
+  $id = $_POST["id"];
+  $stmt = $dbConnection->prepare("DELETE FROM cart WHERE id=?");
+  $stmt->bind_param("i",$id);
+  $stmt->execute();
+}
