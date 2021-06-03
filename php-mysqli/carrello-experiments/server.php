@@ -52,23 +52,23 @@ if(isset($_POST["productId"])) {
 
 // aggiorno database in seguito a cambiamento quantità nel carrello
 if(isset($_POST["changeProductQuantity"])) {
-  $id = $_POST["cartItemId"];
+  $productId = $_POST["cartItemId"];
   $productCode = $_POST["productCode"];
   $productQuantity = $_POST["productQuantity"];
   $productPrice = $_POST["productPrice"];
 
-  $total_price = $productPrice * $productQuantity;
+  // $total_price = $productPrice * $productQuantity;
 
-  $stmt = $dbConnection->prepare("UPDATE cart SET qty=?, total_price=? WHERE product_code=?");
-  $stmt->bind_param("ids", $productQuantity, $total_price, $productCode ); // per evitare sql injection
+  $stmt = $dbConnection->prepare("UPDATE orders SET qty=? WHERE product_id=?");
+  $stmt->bind_param("ii", $productQuantity, $productId ); // per evitare sql injection
   $stmt->execute();
 
   $response = $stmt->get_result();
   $res = $response->fetch_assoc();
-  $code = $res["product_code"] ?? "";
+  $code = $res["product_id"] ?? "";
   
-  $query = $dbConnection->prepare("INSERT INTO cart (product_code, qty, product_price, total_price) VALUES (?,?,?,?)");
-  $query->bind_param("sidd",$productCode, $productQuantity, $productPrice, $total_price);
+  $query = $dbConnection->prepare("INSERT INTO orders (product_id, qty) VALUES (?,?)");
+  $query->bind_param("ii",$productId, $productQuantity);
   $query->execute();
 }
 
