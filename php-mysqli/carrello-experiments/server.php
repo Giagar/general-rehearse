@@ -73,7 +73,7 @@ if(isset($_POST["changeProductQuantity"])) {
 }
 
 // prendere dati da carrello
-$stmt = $dbConnection->prepare("SELECT * FROM cart");
+$stmt = $dbConnection->prepare("SELECT p.product_name, p.product_price, o.qty, p.product_code, p.id, p.product_price * o.qty as total_price FROM orders o JOIN products p ON o.product_id = p.id");
 $stmt->execute();
 $result = $stmt->get_result();
 $cartContent = [];
@@ -91,7 +91,7 @@ $cartContent[1][] = $grand_total;
 
 // svuota carrello
 if (isset($_POST["clear"])) {
-  $stmt = $dbConnection->prepare("DELETE FROM cart");
+  $stmt = $dbConnection->prepare("DELETE FROM orders");
   $stmt->execute();
 }
 
