@@ -13,26 +13,26 @@ $productList[] = $row;
 // aggiungo i prodotti arrivati da index.php al carrello (tabella db)
 if(isset($_POST["productId"])) {
     $productId = $_POST["productId"];
-    $productName = $_POST["productName"];
-    $productCode = $_POST["productCode"];
+    // $productName = $_POST["productName"];
+    // $productCode = $_POST["productCode"];
     $productQuantity = $_POST["productQuantity"];
-    $productPrice = $_POST["productPrice"];
+    // $productPrice = $_POST["productPrice"];
 
-    $total_price = $productPrice * $productQuantity;
+    // $total_price = $productPrice * $productQuantity;
 
-    $stmt = $dbConnection->prepare("SELECT product_code FROM cart WHERE product_code=?");
-    $stmt->bind_param("s", $productCode, ); // per evitare sql injection
+    $stmt = $dbConnection->prepare("SELECT product_id FROM orders WHERE product_id=?");
+    $stmt->bind_param("i", $productId, ); // per evitare sql injection
     $stmt->execute();
 
     $response = $stmt->get_result();
     $res = $response->fetch_assoc();
-    $code = $res["product_code"] ?? "";
+    $code = $res["product_id"] ?? "";
     
     // controlla che il prodotto non sia già presente nel carrello
     if (!$code) {
       // se non ancora presente
-	    $query = $dbConnection->prepare("INSERT INTO cart (product_name, product_code, qty, product_price, total_price) VALUES (?,?,?,?,?)");
-	    $query->bind_param("ssidd", $productName, $productCode, $productQuantity, $productPrice, $total_price);
+	    $query = $dbConnection->prepare("INSERT INTO orders (product_id, qty) VALUES (?,?)");
+	    $query->bind_param("ii", $productId, $productQuantity);
 	    $query->execute();
 
       // messaggio di successo
