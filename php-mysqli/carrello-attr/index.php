@@ -138,12 +138,17 @@
                 
                 cartIsEmpty = false;
 
-                let productId = $(this).parent().find(".product-id").val();
-                let productName = $(this).parent().find(".product-name").val();
-                let productCode = $(this).parent().find(".product-code").val();
-                let productPrice = $(this).parent().find(".product-price").val();
+                // prova
+                let dataset = e.target.parentElement.querySelector(".product-quantity").dataset;
+                
+                let productId = dataset.productId;
+                let productName = dataset.productName;
+                let productCode = dataset.productCode;
+                let productPrice = dataset.productPrice;
                 let productQuantity = $(this).parent().find(".product-quantity").val();
-
+                console.log(productId, productName, productCode, productPrice, productQuantity);
+                // /prova
+                
                 // validazione input
                 if(quantityValidation(productQuantity)) {
                     $(this).parent().find(".product-quantity").css("outline", "2px solid red");
@@ -291,7 +296,7 @@
                                 <!-- form per inviare prodotto a carrello -->
                                 <div class="shop-controls col-12 offset-sm-6 col-sm-6 offset-lg-0 col-lg-6 d-sm-flex justify-content-end">
                                     <form action="#" class="form-submit">
-                                        <input type="number" class="product-quantity" name="product_quantity" value="1" min="1" max="1000">
+                                        <input type="number" class="product-quantity" name="product_quantity" value="1" min="1" max="1000" data-product-id="${product.id}" data-product-name="${product.product_name}" data-product-code="${product.product_code}" data-product-price="${product.product_price}">
                                         
                                         <!-- input nascosti: compilazione tabella cart -->
                                         <input type="hidden" class="product-id" name="product_id" value="${product.id}">
