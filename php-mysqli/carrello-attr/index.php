@@ -92,9 +92,7 @@
 
                 let $element = $(this).parents("form");
                 let newProductQuantity = $element.find(".product-quantity").val();
-                let cartItemId = $element.find(".cart-item-id").val();
-                let productPrice = $element.find(".product-price").val();
-                let productCode = $element.find(".product-code").val();
+                let cartItemId = e.target.parentElement.querySelector(".product-quantity").dataset.productId;
 
                 $.ajax({
                     url: "./server.php",
@@ -103,8 +101,6 @@
                         changeProductQuantity: true,
                         productQuantity: newProductQuantity,
                         cartItemId: cartItemId,
-                        productPrice: productPrice,
-                        productCode: productCode,
                     },
                     success: res => updateCart(),
                     error: err => console.error(err),
@@ -118,14 +114,14 @@
                 $(".cart").children().length > 2 ? cartIsEmpty = false : cartIsEmpty = true;
 
                 // dati del prodotto da eliminare
-                let cartItemId = $(this).parents("form").find(".cart-item-id").val();
+                let cartItemId = e.target.parentElement.parentElement.querySelector(".product-quantity").dataset.productId;
 
                 $.ajax({
                     url: "./server.php",
                     method: "post",
                     data: {
                         delete: true,
-                        id: cartItemId,
+                        cartItemId: cartItemId,
                     },
                     success: res => updateCart(),
                     error: err => console.error(err),
@@ -215,13 +211,10 @@
                                     <div class="col-12 col-lg-8">
                                         <div class="row">
                                             <div class="col-12 col-md-8">
-                                                <form action="#">
-                                                    <input type="hidden" class="cart-item-id" name="cart_item_id" value="${product.id}">
-                                                    <input type="hidden" class="product-code" name="product_code" value="${product.product_code}">
-                                                    <input type="hidden" class="product-price" name="product-price" value="${product.product_price}">
-                                                    <div class="row row">                                                  
+                                                <form action="#">                                                   
+                                                    <div class="row">                                                  
                                                         <div class="quantity-container col-6">
-                                                            <input type="number" class="product-quantity form-control" name="product_quantity" value="${product.qty}" min="1" max="1000">
+                                                            <input type="number" class="product-quantity form-control" name="product_quantity" value="${product.qty}" min="1" max="1000" data-product-id="${product.id}">
                                                         </div>
                                                         <div class="col-6">
                                                             <button class="deleteItem-btn btn btn-warning" type="submit">cancella</button>                                            

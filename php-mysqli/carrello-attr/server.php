@@ -13,12 +13,7 @@ $productList[] = $row;
 // aggiungo i prodotti arrivati da index.php al carrello (tabella db)
 if(isset($_POST["productId"])) {
     $productId = $_POST["productId"];
-    // $productName = $_POST["productName"];
-    // $productCode = $_POST["productCode"];
     $productQuantity = $_POST["productQuantity"];
-    // $productPrice = $_POST["productPrice"];
-
-    // $total_price = $productPrice * $productQuantity;
 
     $stmt = $dbConnection->prepare("SELECT product_id FROM orders WHERE product_id=?");
     $stmt->bind_param("i", $productId, ); // per evitare sql injection
@@ -53,11 +48,7 @@ if(isset($_POST["productId"])) {
 // aggiorno database in seguito a cambiamento quantità nel carrello
 if(isset($_POST["changeProductQuantity"])) {
   $productId = $_POST["cartItemId"];
-  $productCode = $_POST["productCode"];
   $productQuantity = $_POST["productQuantity"];
-  $productPrice = $_POST["productPrice"];
-
-  // $total_price = $productPrice * $productQuantity;
 
   $stmt = $dbConnection->prepare("UPDATE orders SET qty=? WHERE product_id=?");
   $stmt->bind_param("ii", $productQuantity, $productId ); // per evitare sql injection
@@ -97,7 +88,7 @@ if (isset($_POST["clear"])) {
 
 // elimina un elemento dal carrello
 if (isset($_POST["delete"])) {
-  $productId = $_POST["id"];
+  $productId = $_POST["cartItemId"];
   $stmt = $dbConnection->prepare("DELETE FROM orders WHERE product_id=?");
   $stmt->bind_param("i",$productId);
   $stmt->execute();
