@@ -432,6 +432,136 @@
     </script>
     <hr>
 
+    <h3>Algo16: Chunky Monkey</h3>
+    <?php
+    // function mutation($arr)
+    // {
+    //     foreach (str_split($arr[1]) as $letter) {
+    //         if (!preg_match("/$letter/i", $arr[0])) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+    // var_dump(mutation(["hello", "hey"]));
+
+    ?>
+    <div class="js-result-algo16"></div>
+    <script>
+        // function mutation(arr) {
+        //     for(let letter of arr[1]) {
+        //         let regex = new RegExp(letter, "i");
+        //         if(!regex.test(arr[0])) {
+        //             return false;
+        //         }
+        //     }
+
+        //     return true;
+        // }
+
+        // document.querySelector(".js-result-algo16").innerHTML = mutation(["hello", "hey"]);
+
+
+    </script>
+    <hr>
+
+    <h3>Algo17: Sum all numbers in a range</h3>
+    <?php
+    // function mutation($arr)
+    // {
+    //     foreach (str_split($arr[1]) as $letter) {
+    //         if (!preg_match("/$letter/i", $arr[0])) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+    // var_dump(mutation(["hello", "hey"]));
+
+    ?>
+    <div class="js-result-algo17"></div>
+    <script>
+    function sumAll(arr) {
+        let result = 0;
+        arr = arr.sort((a, b) => a-b);
+
+        for(let i = arr[0]; i <= arr[arr.length - 1]; i++) {
+            result += i;
+        }
+
+        return result; 
+    }
+    
+    document.querySelector(".js-result-algo17").innerHTML = sumAll([1, 4]);
+
+    </script>
+    <hr>
+
+    <h3>Algo18: Diff Two Arrays</h3>
+    <?php
+    // function mutation($arr)
+    // {
+    //     foreach (str_split($arr[1]) as $letter) {
+    //         if (!preg_match("/$letter/i", $arr[0])) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+    // var_dump(mutation(["hello", "hey"]));
+
+    ?>
+    <div class="js-result-algo18"></div>
+    <script>
+    function diffArray(arr1, arr2) {
+        let all = [...arr1, ...arr2];
+        let result = [];
+
+        for(let i = 0; i < all.length; i++) {
+            let newArray = [...all.slice(0, i), ...all.slice(i + 1, all.length)];
+            if((newArray).indexOf(all[i]) === -1) {
+                result.push(all[i]);
+            }
+        }
+
+        return result;
+
+    }
+
+    document.querySelector(".js-result-algo18").innerHTML = diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+
+    </script>
+    <hr>
+
+    <h3>Algo19: Seek and Destroy</h3>
+    <?php
+    // function mutation($arr)
+    // {
+    //     foreach (str_split($arr[1]) as $letter) {
+    //         if (!preg_match("/$letter/i", $arr[0])) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+    // var_dump(mutation(["hello", "hey"]));
+
+    ?>
+    <div class="js-result-algo19"></div>
+    <script>
+    function destroyer(arr) {
+    
+    }
+
+    document.querySelector(".js-result-algo19").innerHTML = destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+    </script>
+    <hr>
+
 
 </body>
 
