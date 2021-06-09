@@ -19,8 +19,8 @@
         </section>
     
     </main> -->
-    <h2>Algo1: Basic Algorithms</h2>
-    <h3>Convert Celsius to Fahrenheit</h3>
+    <h2>Basic Algorithms</h2>
+    <h3>Algo1: Convert Celsius to Fahrenheit</h3>
     <?php
     function convertToF($celsius)
     {
@@ -466,6 +466,7 @@
     </script>
     <hr>
 
+    <h2>Intermediate Algorithms</h2>
     <h3>Algo17: Sum all numbers in a range</h3>
     <?php
     // function mutation($arr)
@@ -554,10 +555,52 @@
     <div class="js-result-algo19"></div>
     <script>
     function destroyer(arr) {
-    
+        let args = [...arguments];
+
+        for(let i = 1; i < args.length; i++) {
+            for(let l = 0; l < arr.length; l++) {
+                if(args[i] === arr[l]) {
+                    arr[l] = null;
+                }
+            }
+        }
+
+        return arr.filter(el => el);
+
     }
 
     document.querySelector(".js-result-algo19").innerHTML = destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+    </script>
+    <hr>
+
+    <h3>Algo20: Wherefore art thou</h3>
+    <?php
+    // function mutation($arr)
+    // {
+    //     foreach (str_split($arr[1]) as $letter) {
+    //         if (!preg_match("/$letter/i", $arr[0])) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+    // var_dump(mutation(["hello", "hey"]));
+
+    ?>
+    <div class="js-result-algo20"></div>
+    <script>
+    function whatIsInAName(collection, source) {
+    var arr = [];
+    // Only change code below this line
+    
+
+    // Only change code above this line
+    return arr;
+    }
+
+    document.querySelector(".js-result-algo20").innerHTML = whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
 
     </script>
     <hr>
